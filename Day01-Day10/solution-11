@@ -1,0 +1,10 @@
+ssh tony@stapp01   # (use the given creds)
+sudo yum install -y tomcat tomcat-webapps tomcat-admin-webapps
+sudo vi /etc/tomcat/server.xml    #change the port no8080 to 8089
+scp /tmp/ROOT.war tony@stapp01:/tmp/
+sudo mv /tmp/ROOT.war /usr/share/tomcat/webapps/
+sudo systemctl restart tomcat
+sudo systemctl enable tomcat
+curl http://stapp01:8089
+
+

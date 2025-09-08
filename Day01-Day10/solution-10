@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Variables
+SRC="/var/www/html/ecommerce"      # directory to backup
+DEST="/backup"                     # local backup folder
+ARCHIVE="xfusioncorp_beta.zip"     # archive file name
+REMOTE_IP="172.16.238.16"          # backup server IP
+REMOTE_USER="backup"               # backup server user
+REMOTE_DIR="/backup"               # remote backup location
+
+echo "Starting backup process..."
+
+# Step 1: Create zip archive locally
+zip -r ${DEST}/${ARCHIVE} ${SRC}
+echo "Backup created at ${DEST}/${ARCHIVE}"
+
+# Step 2: Copy archive to backup server
+scp ${DEST}/${ARCHIVE} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DIR}/
+echo "Backup copied to ${REMOTE_IP}:${REMOTE_DIR}/"
+
+echo "Backup process completed successfully!"
+
